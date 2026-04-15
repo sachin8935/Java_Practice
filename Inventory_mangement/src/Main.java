@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        Inventory items = new Inventory();
+        Inventory inv = new Inventory();
+        int id=1;
         System.out.println("Welcome to the inventory management system");
         while(true){
             System.out.println("Enter 1 if you want to add a product");
@@ -15,19 +16,20 @@ public class Main {
             int input =sc.nextInt();
             sc.nextLine();
             if(input==1){
-                items.addProduct();
+                inv.addProduct(sc,id);
+                id++;
             }
             else if(input==2){
-                items.deleteProduct();
+                inv.deleteProduct(sc);
             }
             else if(input==3){
-                items.updateProduct();
+                inv.updateProduct(sc);
             }
             else if(input==4){
-                items.searchProduct();
+                inv.searchProduct(sc);
             }
             else if(input==5){
-                items.sortProduct();
+                inv.sortProduct(sc);
             }
             else{
                 break;
