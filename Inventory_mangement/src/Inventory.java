@@ -1,4 +1,12 @@
 import java.util.*;
+class Pair{
+    int first;
+    int second;
+    Pair(int first, int second){
+        this.first=first;
+        this.second=second;
+    }
+}
 public class Inventory {
     Map<Integer,Product> Items= new HashMap<>();
     Product P;
@@ -102,22 +110,34 @@ public class Inventory {
         System.out.println("Enter 2 if you want to sort product by quantity");
         val=sc.nextInt();
         if(val==1){
-            Map<Integer,String> updatedItem = new HashMap<>();
+            ArrayList<Pair> arr= new ArrayList<>();
             Items.forEach((key,value)->{
-                updatedItem.put(value.getPrice(),value.getName());
+                arr.add(new Pair(value.getPrice(), value.getId()));
             });
-            updatedItem.forEach((key,value)->{
-                System.out.println("Price-> "+key+ " Item "+ value );
+            Collections.sort(arr, (a,b)->{
+                if(a.first!=b.first){
+                    return a.first-b.first;
+                }
+                return a.second-b.second;
             });
+            for(Pair P:arr){
+                System.out.println(" Id "+ P.second + " Price " + P.first);
+            }
         }
         else if(val==2){
-            Map<Integer,String> updatedItem = new HashMap<>();
+            ArrayList<Pair> arr= new ArrayList<>();
             Items.forEach((key,value)->{
-                updatedItem.put(value.getQuantity(),value.getName());
+                arr.add(new Pair(value.getQuantity(), value.getId()));
             });
-            updatedItem.forEach((key,value)->{
-                System.out.println("Quantity-> "+key+ " Item "+ value );
+            Collections.sort(arr, (a,b)->{
+                if(a.first!=b.first){
+                    return a.first-b.first;
+                }
+                return a.second-b.second;
             });
+            for(Pair P:arr){
+                System.out.println(" Id "+ P.second + " Quantity " + P.first);
+            }
         }
         else{
             System.out.println("Please enter a valid key");
